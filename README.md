@@ -18,7 +18,7 @@ Použité služby: BookService,BorrowedService
 
 Použité služby: AudioService
 
-### Microservices
+## Microservices
 - BookService - služba pro poskytování brožových knih (aktualizace naskladnění, vkládání nových knih, odebírání knih)
 - AudioService - služba pro poskytování audio knih
 
@@ -28,7 +28,7 @@ Použité služby: AudioService
 - BorrowedService - služba pro zapůjčení knih.
 - BoughtService - služba pro nákup zboži.
 
-### Tým
+## Tým
 | Jméno |
 |------------------|
 | David Löffler |
