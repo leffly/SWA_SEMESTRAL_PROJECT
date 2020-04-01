@@ -33,5 +33,5 @@ Použité služby: AudioService
 |------------------|
 | David Löffler |
 | Jiří Soběslavský |
-| Artem Grigoryan |
-| Bogdan Grigoryan |
+| Artem Grigorian |
+| Bogdan Grigorian |
