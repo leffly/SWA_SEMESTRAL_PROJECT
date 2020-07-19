@@ -5,9 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="bookify_client")
+@Table(name = "bookify_client")
 public class Client implements Serializable {
-
 
     @Id
     @GeneratedValue
@@ -17,7 +16,7 @@ public class Client implements Serializable {
     private String lastName;
     private String email;
 
-    @OneToMany(mappedBy="client")
+    @OneToMany(mappedBy = "client")
     private List<Order> orders;
 
     public Client() {

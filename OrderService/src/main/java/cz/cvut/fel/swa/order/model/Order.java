@@ -2,13 +2,11 @@ package cz.cvut.fel.swa.order.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="bookify_orders")
+@Table(name = "bookify_orders")
 public class Order implements Serializable {
-
 
     @Id
     @GeneratedValue
@@ -16,10 +14,10 @@ public class Order implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="client_id")
+    @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy="order")
+    @OneToMany(mappedBy = "order")
     private List<OrderedBooks> books;
 
     private int totalPrice;
@@ -68,9 +66,11 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public int calculateTotalPrice(){
+    public int calculateTotalPrice() {
         this.totalPrice = 0;
-        books.forEach(b->{ this.totalPrice += b.getBook().getPrice();});
+        books.forEach(b -> {
+            this.totalPrice += b.getBook().getPrice();
+        });
         return this.totalPrice;
     }
 

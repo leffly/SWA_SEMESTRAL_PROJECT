@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -22,8 +24,8 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Order>> getOrder(@RequestBody Client client) {
-        return new ResponseEntity<>(orderService.findOrderByClientEmail(client),HttpStatus.OK);
+        return new ResponseEntity<>(orderService.findOrderByClientEmail(client), HttpStatus.OK);
     }
 }

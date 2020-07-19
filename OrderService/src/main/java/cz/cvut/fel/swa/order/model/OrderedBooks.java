@@ -6,17 +6,18 @@ import java.io.Serializable;
 @Entity
 @Table(name = "bookify_ordered_books")
 public class OrderedBooks implements Serializable {
+
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="order_id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name="book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
 
     public OrderedBooks() {

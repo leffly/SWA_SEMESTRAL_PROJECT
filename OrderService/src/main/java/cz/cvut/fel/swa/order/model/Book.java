@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="bookify_books")
+@Table(name = "bookify_books")
 public class Book implements Serializable {
 
     @Id
@@ -21,7 +21,7 @@ public class Book implements Serializable {
     private String supplier;
     private String genre;
 
-    @OneToMany(mappedBy="book")
+    @OneToMany(mappedBy = "book")
     private List<OrderedBooks> orders;
 
     public Book() {
