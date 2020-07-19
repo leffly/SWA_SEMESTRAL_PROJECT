@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a36a5225-4bbd-4476-9506-be31f6d12033" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1eUtIYDmcKEU0h5W3ZbhFieapSW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../StoreService" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="cz.cvut.fel.swa.book" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cz.cvut.fel.swa.order.request" />
+      <recent name="cz.cvut.fel.swa.order.config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BookServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="book-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cz.cvut.fel.swa.order.OrderServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a36a5225-4bbd-4476-9506-be31f6d12033" name="Default Changelist" comment="" />
+      <created>1594387919523</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594387919523</updated>
+      <workItem from="1594387922624" duration="2510000" />
+      <workItem from="1594567894549" duration="7423000" />
+      <workItem from="1594576196379" duration="398000" />
+      <workItem from="1594578543741" duration="1873000" />
+      <workItem from="1594583609262" duration="219000" />
+      <workItem from="1595116761135" duration="10769000" />
+      <workItem from="1595151107380" duration="5983000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="556" y="180" key="#Assign_Data_Sources" timestamp="1594578955703">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="556" y="180" key="#Assign_Data_Sources/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594578955703" />
+    <state x="556" y="182" key="#Auto_Import" timestamp="1594579026898">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="556" y="182" key="#Auto_Import/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594579026898" />
+    <state x="556" y="202" key="#Project_Structure" timestamp="1594387936473">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="556" y="202" key="#Project_Structure/0.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1594387936473" />
+    <state x="769" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1595157339195">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1595157339195" />
+    <state x="769" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594579509560" />
+    <state x="496" y="468" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1594389319679">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="496" y="468" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1594389319679" />
+    <state x="739" y="422" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1594389321191">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="739" y="422" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1594389321191" />
+    <state x="666" y="0" width="588" height="1044" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1594569796770">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="666" y="0" width="588" height="1044" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594569796770" />
+    <state x="694" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595156586734">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="694" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595156586734" />
+    <state x="744" y="278" key="FileChooserDialogImpl" timestamp="1594580416234">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="744" y="278" key="FileChooserDialogImpl/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594580416234" />
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom" timestamp="1594580417659">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594580417659" />
+    <state width="1874" height="275" key="GridCell.Tab.0.center" timestamp="1594580417658">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.center/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594580417658" />
+    <state width="1874" height="275" key="GridCell.Tab.0.left" timestamp="1594580417658">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.left/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594580417658" />
+    <state width="1874" height="275" key="GridCell.Tab.0.right" timestamp="1594580417658">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="275" key="GridCell.Tab.0.right/0.0.1920.1080/0.1080.1920.1080@0.0.1920.1080" timestamp="1594580417658" />
+  </component>
+</project>

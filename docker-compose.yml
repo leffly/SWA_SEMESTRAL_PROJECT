@@ -1,0 +1,122 @@
+version: '2.1'
+
+services:
+  books-postgresql:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=booksDB
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 30s
+        timeout: 90s
+        retries: 3
+  orders-postgresql:
+    image: postgres
+    ports:
+      - "5961:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=ordersDB
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 30s
+        timeout: 90s
+        retries: 3
+  store:
+    build: ./StoreService
+    environment:
+      - PORT=5001
+      - BOOKIFY_MSG_TOPIC_BOOK_OFFER=book_offer
+      - BOOKIFY_MSG_TOPIC_COMPLEMENT_ORDER=complement_order
+      - BOOKIFY_MSG_PORT=9092
+      - BOOKIFY_MSG_ADDRESS=kafka
+    ports:
+      - '8081:5001'
+    depends_on:
+      - kafka
+  orders:
+    build: ./OrderService
+    environment:
+      - PORT=5002
+      - BOOKIFY_MSG_TOPIC_BOOK_OFFER=book_offer
+      - BOOKIFY_MSG_TOPIC_COMPLEMENT_ORDER=complement_order
+      - BOOKIFY_MSG_TOPIC_CALCULATE_ORDER=calculate_order
+      - BOOKIFY_MSG_PORT=9092
+      - BOOKIFY_MSG_ADDRESS=kafka
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=ordersDB
+      - POSTGRES_URL=orders-postgresql
+      - POSTGRES_PORT=5432
+      - POSTGRES_DDL_CONFIG=create-drop
+    ports:
+      - '8082:5002'
+    links:
+      - orders-postgresql
+    depends_on:
+      orders-postgresql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+  books:
+    build: ./BookService
+    environment:
+      - PORT=5000
+      - BOOKIFY_MSG_TOPIC_BOOK_OFFER=book_offer
+      - BOOKIFY_MSG_TOPIC_COMPLEMENT_ORDER=complement_order
+      - BOOKIFY_MSG_TOPIC_CALCULATE_ORDER=calculate_order
+      - BOOKIFY_MSG_PORT=9092
+      - BOOKIFY_MSG_ADDRESS=kafka
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=booksDB
+      - POSTGRES_URL=books-postgresql
+      - POSTGRES_PORT=5432
+      - POSTGRES_DDL_CONFIG=create-drop
+    ports:
+      - '8080:5000'
+    links:
+      - books-postgresql
+    depends_on:
+      books-postgresql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+  zookeeper:
+    image: 'bitnami/zookeeper:3.5.6'
+    volumes:
+      - 'zookeeper_data:/bitnami'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:2.4.0'
+    volumes:
+      - 'kafka_data:/bitnami'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+    depends_on:
+      - zookeeper
+  kafka-management:
+    image: 'obsidiandynamics/kafdrop:3.23.0'
+    ports:
+      - '9000:9000'
+    environment:
+      - KAFKA_BROKERCONNECT=kafka:9092
+      - JVM_OPTS=-Xms32M -Xmx64M
+      - SERVER_SERVLET_CONTEXTPATH=/
+    depends_on:
+      - kafka
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local

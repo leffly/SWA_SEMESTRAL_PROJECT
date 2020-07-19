@@ -1,37 +1,57 @@
-# BOOKIFY
-Bookify je služba, která agreguje různé služby poskytující vypůjčování nebo prodej knih ve formě brožové, elektronické (pdf, epub atd.) nebo mluvené slovo (.mp3)
+# Using multiple databases with the official PostgreSQL Docker image
 
-## Scénáře použití
-- Uživatel si vybere z aktuálně dostupných produktů produkty, které si chce koupit a následně si je vloží do košíku. (pokud vypadne jedna ze služeb, která poskytuje typ produktu, produkt bude nedostupný pro další akci).
+The [official recommendation](https://hub.docker.com/_/postgres/) for creating
+multiple databases is as follows:
 
-Použité služby: BoughtService, BookService / AudioService
+*If you would like to do additional initialization in an image derived from
+this one, add one or more `*.sql`, `*.sql.gz`, or `*.sh` scripts under
+`/docker-entrypoint-initdb.d` (creating the directory if necessary). After the
+entrypoint calls `initdb` to create the default `postgres` user and database,
+it will run any `*.sql` files and source any `*.sh` scripts found in that
+directory to do further initialization before starting the service.*
 
-- Uživatel si zkontroluje dostupnost audioknihy XY. Zjistí, že audiokniha XY je nedostupná a zažádá si o sledování dostupnosti.
+This directory contains a script to create multiple databases using that
+mechanism.
 
-Použité služby: StoreAvailabilityService
+## Usage
 
-- Uživatel si zapůjčil několik knih.
+### By mounting a volume
 
-Použité služby: BookService,BorrowedService 
+Clone the repository, mount its directory as a volume into
+`/docker-entrypoint-initdb.d` and declare database names separated by commas in
+`POSTGRES_MULTIPLE_DATABASES` environment variable as follows
+(`docker-compose` syntax):
 
-- Jedna ze služeb poskytující audioknihy přidala do své nabídky novou audioknihu.
+    myapp-postgresql:
+        image: postgres:9.6.2
+        volumes:
+            - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+        environment:
+            - POSTGRES_MULTIPLE_DATABASES=db1,db2
+            - POSTGRES_USER=myapp
+            - POSTGRES_PASSWORD=
 
-Použité služby: AudioService
+### By building a custom image
 
-## Microservices
-- BookService - služba pro poskytování brožových knih (aktualizace naskladnění, vkládání nových knih, odebírání knih)
-- AudioService - služba pro poskytování audio knih
+Clone the repository, build and push the image to your Docker repository,
+for example for Google Private Repository do the following:
 
-(EBookService - služba pro poskytování elektronických knih )
+    docker build --tag=eu.gcr.io/your-project/postgres-multi-db .
+    gcloud docker -- push eu.gcr.io/your-project/postgres-multi-db
 
-- StoreAvailabilityService - služba pro zjištení dostupnosti knih a audio knih.
-- BorrowedService - služba pro zapůjčení knih.
-- BoughtService - služba pro nákup zboži.
+You still need to pass the `POSTGRES_MULTIPLE_DATABASES` environment variable
+to the container:
 
-## Tým
-| Jméno |
-|------------------|
-| David Löffler |
-| Jiří Soběslavský |
-| Artem Grigorian |
-| Bogdan Grigorian |
+    myapp-postgresql:
+        image: eu.gcr.io/your-project/postgres-multi-db
+        environment:
+            - POSTGRES_MULTIPLE_DATABASES=db1,db2
+            - POSTGRES_USER=myapp
+            - POSTGRES_PASSWORD=
+
+### Non-standard database names
+
+If you need to use non-standard database names (hyphens, uppercase letters etc), quote them in `POSTGRES_MULTIPLE_DATABASES`:
+
+        environment:
+            - POSTGRES_MULTIPLE_DATABASES="test-db-1","test-db-2"
