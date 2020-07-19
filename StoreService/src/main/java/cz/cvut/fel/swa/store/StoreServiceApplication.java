@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "cz.cvut.fel.swa")
 public class StoreServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StoreServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StoreServiceApplication.class, args);
+    }
 
 }

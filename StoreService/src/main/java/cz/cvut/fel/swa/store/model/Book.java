@@ -1,6 +1,7 @@
 package cz.cvut.fel.swa.store.model;
 
 import cz.cvut.fel.swa.store.enums.BookCarrierType;
+
 import java.io.Serializable;
 
 public class Book implements Serializable {

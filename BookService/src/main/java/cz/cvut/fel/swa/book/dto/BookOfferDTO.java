@@ -9,8 +9,6 @@ public class BookOfferDTO {
 
     private List<Book> books;
 
-
-
     public BookOfferDTO(List<Book> books) {
         this.books = books;
     }
@@ -23,8 +21,8 @@ public class BookOfferDTO {
         this.books = books;
     }
 
-    public void addBook(Book book){
-        if(books == null) books = new ArrayList<>();
+    public void addBook(Book book) {
+        if (books == null) books = new ArrayList<>();
         books.add(book);
     }
 }

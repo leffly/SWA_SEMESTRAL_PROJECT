@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/store")
 public class StoreController {
@@ -19,7 +21,7 @@ public class StoreController {
         this.completeOrderService = completeOrderService;
     }
 
-    @PostMapping(value = "/order", produces = "application/json", consumes = "application/json")
+    @PostMapping(value = "/order", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<String> completeOrder(@RequestBody CompleteOrderRequest completeOrderRequest) {
         ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if (completeOrderRequest.isValid()) {

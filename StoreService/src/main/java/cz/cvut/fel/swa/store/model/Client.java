@@ -1,7 +1,6 @@
 package cz.cvut.fel.swa.store.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Client implements Serializable {
 

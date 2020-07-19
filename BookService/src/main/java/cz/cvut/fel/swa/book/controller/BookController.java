@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/book")
 public class BookController {
@@ -18,14 +20,13 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Book>> getAllBooks() {
-        return new ResponseEntity<>(bookService.findAll(),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(bookService.findAll(), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<HttpStatus> storeBooks
-            (@RequestBody List<Book> books) {
+    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> storeBooks(@RequestBody List<Book> books) {
         bookService.save(books);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
