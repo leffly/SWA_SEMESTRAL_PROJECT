@@ -22,11 +22,11 @@ public class StoreController {
     }
 
     @PostMapping(value = "/order", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> completeOrder(@RequestBody CompleteOrderRequest completeOrderRequest) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity completeOrder(@RequestBody CompleteOrderRequest completeOrderRequest) {
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.BAD_REQUEST);
         if (completeOrderRequest.isValid()) {
             completeOrderService.sendCompleteOrderMessage(completeOrderRequest);
-            responseEntity = new ResponseEntity<>(HttpStatus.OK);
+            responseEntity = new ResponseEntity(HttpStatus.OK);
         }
         return responseEntity;
     }

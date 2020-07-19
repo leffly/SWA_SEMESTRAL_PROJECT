@@ -26,8 +26,8 @@ public class BookController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> storeBooks(@RequestBody List<Book> books) {
+    public ResponseEntity storeBooks(@RequestBody List<Book> books) {
         bookService.save(books);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }
