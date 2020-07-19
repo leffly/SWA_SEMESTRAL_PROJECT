@@ -4,7 +4,10 @@ import cz.cvut.fel.swa.store.request.CompleteOrderRequest;
 import cz.cvut.fel.swa.store.service.CompleteOrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/store")
@@ -17,13 +20,11 @@ public class StoreController {
     }
 
     @PostMapping(value = "/order", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<String> completeOrder(@RequestBody CompleteOrderRequest completeOrderRequest){
-        ResponseEntity responseEntity = new ResponseEntity("FAIL", HttpStatus.INTERNAL_SERVER_ERROR);
-        if(completeOrderRequest != null && completeOrderRequest.getBooks() != null
-                && completeOrderRequest.getBooks().size() > 0 && completeOrderRequest.getClient() != null
-                && !completeOrderRequest.getClient().getEmail().isBlank()){
+    public ResponseEntity<String> completeOrder(@RequestBody CompleteOrderRequest completeOrderRequest) {
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (completeOrderRequest.isValid()) {
             completeOrderService.sendCompleteOrderMessage(completeOrderRequest);
-            responseEntity = new ResponseEntity("SUCCESS", HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(HttpStatus.OK);
         }
         return responseEntity;
     }

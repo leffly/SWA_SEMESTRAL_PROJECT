@@ -29,6 +29,10 @@ public class CompleteOrderRequest {
         this.books = books;
     }
 
+    public boolean isValid() {
+        return books != null && !books.isEmpty() && client != null && !client.getEmail().isBlank();
+    }
+
     @Override
     public String toString() {
         return "CompleteOrderRequest{" +

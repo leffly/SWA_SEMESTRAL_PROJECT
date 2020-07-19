@@ -2,22 +2,19 @@ package cz.cvut.fel.swa.store.service;
 
 import cz.cvut.fel.swa.store.config.KafkaTopicConfig;
 import cz.cvut.fel.swa.store.request.CompleteOrderRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-@Service
 public class CompleteOrderService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final KafkaTemplate<String, CompleteOrderRequest> kafkaTemplate;
     private final KafkaTopicConfig kafkaTopicConfig;
-
-    private final Logger logger = Logger.getLogger(CompleteOrderService.class.getName());
 
     public CompleteOrderService(KafkaTemplate<String, CompleteOrderRequest> kafkaTemplate, KafkaTopicConfig kafkaTopicConfig) {
         this.kafkaTemplate = kafkaTemplate;
@@ -25,21 +22,19 @@ public class CompleteOrderService {
     }
 
     public void sendCompleteOrderMessage(CompleteOrderRequest completeOrderRequest) {
-        ListenableFuture<SendResult<String, CompleteOrderRequest>> future =
-                kafkaTemplate.send(kafkaTopicConfig.complementOrder().name(), completeOrderRequest);
+        ListenableFuture<SendResult<String, CompleteOrderRequest>> future = kafkaTemplate.send(kafkaTopicConfig.complementOrder().name(), completeOrderRequest);
 
-        logger.info("Kafka message prepared - " + completeOrderRequest.toString());
+        logger.info("Kafka message prepared - {}", completeOrderRequest);
 
-        future.addCallback(new ListenableFutureCallback<SendResult<String, CompleteOrderRequest>>() {
+        future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onSuccess(SendResult<String, CompleteOrderRequest> result) {
-                logger.log(Level.INFO,"[COMPLEMENT_ORDER] Sent message=[" + completeOrderRequest.toString() +
-                        "] with offset=[" + result.getRecordMetadata().offset() + "]");
+                logger.info("[COMPLEMENT_ORDER] Sent message=[{}] with offset=[{}]", completeOrderRequest, result.getRecordMetadata().offset());
             }
+
             @Override
             public void onFailure(Throwable ex) {
-                logger.log(Level.SEVERE,"[COMPLEMENT_ORDER] Unable to send message=["
-                        + completeOrderRequest.toString() + "] due to : " + ex.getMessage());
+                logger.error("[COMPLEMENT_ORDER] Unable to send message=[{}] due to exception", completeOrderRequest, ex);
             }
         });
     }
