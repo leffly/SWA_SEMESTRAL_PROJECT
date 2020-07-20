@@ -32,9 +32,7 @@ public class OrderService {
 
     public List<Order> findOrderByClientEmail(Client client) {
         List<Order> orders = orderRepository.findAllByClient_Email(client.getEmail());
-        orders.forEach(o -> {
-            o.setClient(null);
-        });
+        orders.forEach(o -> o.setClient(null));
         // TODO DTO
         return orders;
     }
@@ -43,7 +41,7 @@ public class OrderService {
             groupId = "${bookGroupId}",
             containerFactory = "completeOrderRequestContainerFactory")
     public void listen(CompleteOrderRequest completeOrderRequest) {
-        log.info("[CALCULATE_ORDER] Received Kafka Messasge: {}", completeOrderRequest);
+        log.info("[CALCULATE_ORDER] Received Kafka Message: {}", completeOrderRequest);
         Client client = clientRepository.findByEmail(completeOrderRequest.getClient().getEmail());
         if (client == null) {
             client = completeOrderRequest.getClient();
@@ -53,7 +51,7 @@ public class OrderService {
         List<Book> books = completeOrderRequest.getBooks();
         bookRepository.saveAll(books);
 
-        //TODO STORE books
+        // TODO STORE books
 
         Order order = new Order();
         order.setClient(client);

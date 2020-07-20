@@ -51,7 +51,7 @@ public class BookService {
 
         log.info("Kafka message prepared - " + completeOrderRequest.toString());
 
-        future.addCallback(new ListenableFutureCallback<SendResult<String, CompleteOrderRequest>>() {
+        future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onSuccess(SendResult<String, CompleteOrderRequest> result) {
                 log.info("[CALCULATE_ORDER] Sent message=[{}] with offset=[{}]", completeOrderRequest, result.getRecordMetadata().offset());

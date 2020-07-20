@@ -51,7 +51,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=ordersDB
-      - POSTGRES_URL=orders-postgresql
+      - POSTGRES_HOSTNAME=orders-postgresql
       - POSTGRES_PORT=5432
       - POSTGRES_DDL_CONFIG=create-drop
     ports:
@@ -75,7 +75,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=booksDB
-      - POSTGRES_URL=books-postgresql
+      - POSTGRES_HOSTNAME=books-postgresql
       - POSTGRES_PORT=5432
       - POSTGRES_DDL_CONFIG=create-drop
     ports:
