@@ -1,57 +1,81 @@
-# Using multiple databases with the official PostgreSQL Docker image
+Semestral project (40+5 points)
+1. Codebase – one codebase tracked in revision control, many deploys
 
-The [official recommendation](https://hub.docker.com/_/postgres/) for creating
-multiple databases is as follows:
+        •  separate repositories for each microservice (1)
 
-*If you would like to do additional initialization in an image derived from
-this one, add one or more `*.sql`, `*.sql.gz`, or `*.sh` scripts under
-`/docker-entrypoint-initdb.d` (creating the directory if necessary). After the
-entrypoint calls `initdb` to create the default `postgres` user and database,
-it will run any `*.sql` files and source any `*.sh` scripts found in that
-directory to do further initialization before starting the service.*
+        • continuous integration to build, test and create the artefact (3)
 
-This directory contains a script to create multiple databases using that
-mechanism.
+        • implement some tests and test each service separately (unit tests, integration tests) (5)
 
-## Usage
+2. Dependencies – explicitly declare and isolate dependencies
 
-### By mounting a volume
+        • preferably Maven project with pom.xml
+        
+        • eventually gradle project or other
+        
+3. Config
+        • configuration of services provided via environmental properties (1)
+        
+        • eventually as configuration as code (bonus: 0.5)
+        
+4. Backing services – treat backing services as attached resources
 
-Clone the repository, mount its directory as a volume into
-`/docker-entrypoint-initdb.d` and declare database names separated by commas in
-`POSTGRES_MULTIPLE_DATABASES` environment variable as follows
-(`docker-compose` syntax):
+        • backing services like database and similar will be deployed as containers too (1)
 
-    myapp-postgresql:
-        image: postgres:9.6.2
-        volumes:
-            - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
-        environment:
-            - POSTGRES_MULTIPLE_DATABASES=db1,db2
-            - POSTGRES_USER=myapp
-            - POSTGRES_PASSWORD=
+5. Build, release, run – strictly separate build and run stages
 
-### By building a custom image
+        • CI & docker
 
-Clone the repository, build and push the image to your Docker repository,
-for example for Google Private Repository do the following:
+        • eventually upload your images to docker hub (bonus: 1)
 
-    docker build --tag=eu.gcr.io/your-project/postgres-multi-db .
-    gcloud docker -- push eu.gcr.io/your-project/postgres-multi-db
+6. Processes – execute the app as one or more stateless processes (1)
 
-You still need to pass the `POSTGRES_MULTIPLE_DATABASES` environment variable
-to the container:
+7. Port binding – export services via port binding (1)
 
-    myapp-postgresql:
-        image: eu.gcr.io/your-project/postgres-multi-db
-        environment:
-            - POSTGRES_MULTIPLE_DATABASES=db1,db2
-            - POSTGRES_USER=myapp
-            - POSTGRES_PASSWORD=
+8. Disposability – maximize robustness with fast startup and graceful shutdown
 
-### Non-standard database names
+        • ability to stop/restart service without catastrophic failure for the rest (2)
 
-If you need to use non-standard database names (hyphens, uppercase letters etc), quote them in `POSTGRES_MULTIPLE_DATABASES`:
+9. Dev/prod parity – keep development, staging, and production as similar as possible
 
-        environment:
-            - POSTGRES_MULTIPLE_DATABASES="test-db-1","test-db-2"
+        • repository for integration testing and system demonstration (2)
+
+        • services will be deployed as containers
+
+10. Logs – treat logs as event streams
+
+        • log into standard output (1)
+
+        • eventually collect logs in Elastic (bonus: 0.5)
+
+11. Communication
+
+        • REST API defined using Open API standard (Swagger) (2)
+
+        • auto-generated in each service (1)
+
+        • clear URLs (2)
+
+        • clean usage of HTTP statuses (2)
+
+        • eventually message based asynchronous communication via queue (bonus: 1)
+
+12. Transparency – the client should never know the exact location of a service.
+
+        • service discovery (2)
+
+        • eventually client side load balancing (bonus: 0.5) or workload balancing (bonus: 0.5)
+
+13. Health monitoring – a microservice should communicate its health
+
+        • Actuators (1)
+
+        • eventually Elastic APM (bonus: 1)
+
+14. Design patterns – use the appropriate patterns (2)
+
+15. Scope – use domain driven design or similar to design the microservices (5)
+
+16. Documentation – visually communicate architecture of your system (5)
+
+        • https://c4model.com/ (https://github.com/RicardoNiepel/C4-PlantUML) 
