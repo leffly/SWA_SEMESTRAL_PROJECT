@@ -25,6 +25,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
+    //FIXME wrong constructor ?
     public Order(Client client, List<Book> books) {
         this.client = client;
         this.calculateTotalPrice();

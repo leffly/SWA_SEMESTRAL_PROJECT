@@ -1,1 +1,3 @@
-cz\cvut\fel\swa\book\BookServiceApplicationTests.class
+cz/cvut/fel/swa/book/service/BookServiceTest.class
+cz/cvut/fel/swa/book/KafkaTest.class
+cz/cvut/fel/swa/book/BookServiceApplicationTests.class
