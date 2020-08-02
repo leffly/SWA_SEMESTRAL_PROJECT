@@ -3,8 +3,8 @@ Semestral project (40+5 points)
 
 ```diff
 - separate repositories for each microservice (1)
-- continuous integration to build, test and create the artefact (3)
-- implement some tests and test each service separately (unit tests, integration tests) (5)
++ continuous integration to build, test and create the artefact (3)
++ implement some tests and test each service separately (unit tests, integration tests) (5)
 ```
 
 2. Dependencies – explicitly declare and isolate dependencies
