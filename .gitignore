@@ -27,3 +27,7 @@ hs_err_pid*
 
 # Target
 target/
+
+BookService/target/
+OrderService/target/
+StoreService/target/
