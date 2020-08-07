@@ -10,4 +10,8 @@ cd StoreService
 mvn clean package
 cd ..
 
+cd eureka-server
+mvn clean package
+cd ..
+
 docker-compose build

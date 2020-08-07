@@ -1,6 +1,12 @@
 version: '2.1'
 
 services:
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - PORT=8761
   books-postgresql:
     image: postgres
     ports:
@@ -30,18 +36,22 @@ services:
   store:
     build: ./StoreService
     environment:
+      - APP_NAME=StoreService
       - PORT=5001
       - BOOKIFY_MSG_TOPIC_BOOK_OFFER=book_offer
       - BOOKIFY_MSG_TOPIC_COMPLEMENT_ORDER=complement_order
       - BOOKIFY_MSG_PORT=9092
       - BOOKIFY_MSG_ADDRESS=kafka
+      - EUREKA_SERVER=http://eureka-server:8761/eureka/
     ports:
       - '8081:5001'
     depends_on:
       - kafka
+      - eureka-server
   orders:
     build: ./OrderService
     environment:
+      - APP_NAME=OrderService
       - PORT=5002
       - BOOKIFY_MSG_TOPIC_BOOK_OFFER=book_offer
       - BOOKIFY_MSG_TOPIC_COMPLEMENT_ORDER=complement_order
@@ -54,6 +64,7 @@ services:
       - POSTGRES_HOSTNAME=orders-postgresql
       - POSTGRES_PORT=5432
       - POSTGRES_DDL_CONFIG=create-drop
+      - EUREKA_SERVER=http://eureka-server:8761/eureka/
     ports:
       - '8082:5002'
     links:
@@ -63,9 +74,12 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+      eureka-server:
+        condition: service_started
   books:
     build: ./BookService
     environment:
+      - APP_NAME=BookService
       - PORT=5000
       - BOOKIFY_MSG_TOPIC_BOOK_OFFER=book_offer
       - BOOKIFY_MSG_TOPIC_COMPLEMENT_ORDER=complement_order
@@ -78,6 +92,7 @@ services:
       - POSTGRES_HOSTNAME=books-postgresql
       - POSTGRES_PORT=5432
       - POSTGRES_DDL_CONFIG=create-drop
+      - EUREKA_SERVER=http://eureka-server:8761/eureka/
     ports:
       - '8080:5000'
     links:
@@ -86,6 +101,8 @@ services:
       books-postgresql:
         condition: service_healthy
       kafka:
+        condition: service_started
+      eureka-server:
         condition: service_started
   zookeeper:
     image: 'bitnami/zookeeper:3.5.6'
