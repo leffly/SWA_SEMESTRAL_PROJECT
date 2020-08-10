@@ -108,6 +108,6 @@ Semestral project (40+5 points)
 16. Documentation
 
 ```diff
-- visually communicate architecture of your system (5)
++ visually communicate architecture of your system (5)
 ```
         • https://c4model.com/ (https://github.com/RicardoNiepel/C4-PlantUML) 
