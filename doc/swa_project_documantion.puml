@@ -1,0 +1,52 @@
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+skinparam wrapWidth 1000
+skinparam maxMessageSize 120
+skinparam linetype ortho
+
+LAYOUT_TOP_DOWN
+
+Person(customer, Customer, "A customer")
+
+System_Boundary(bookify, "<size:28>Bookify Architecture</size>") {
+
+    Container(kafka_messaging, "Messaging Bus", "Kafka", "Transport for business events")
+    Container(eureka_server, "Eureka Server", "Java, Spring Boot", "Monitors health of services")
+
+    Container(book_service, "Book Service", "Java, Spring Boot", "Provides information about available books")
+    Container(order_service, "Order Service", "Java, Spring Boot", "Optimizes and completes customers order")
+    Container(store_service, "Store Service", "Java, Spring Boot", "Allows customers to manage their order")
+
+    ContainerDb(order_db, "Order Database", "PostgreSQL", "Stores order information")
+    ContainerDb(book_db, "Book Database", "PostgreSQL", "Stores book information")
+}
+
+Rel(eureka_server, store_service, "<size:10>Monitors</size>")
+Rel(eureka_server, order_service, "<size:10>Monitors</size>")
+Rel(eureka_server, book_service, "<size:10>Monitors</size>")
+
+Rel(customer, store_service, "<size:10>Operates", "HTTP")
+
+Rel_R(store_service, kafka_messaging, "<size:10>Sends complex operation requests to</size>")
+
+Rel(kafka_messaging, book_service, "<size:10>Sends book availability events to</size>")
+
+Rel(book_service, book_db, "<size:10>Stores data in</size>")
+Rel(order_service, order_db, "<size:10>Stores complete orders in</size>")
+
+Rel(book_service, kafka_messaging, "<size:10>Sends book list by distributers for order complemetation to</size>")
+
+Rel(kafka_messaging, order_service, "<size:10>Sends order complementation events to</size>")
+
+Lay_D(eureka_server, store_service)
+Lay_D(eureka_server, book_service)
+Lay_D(eureka_server, order_service)
+Lay_D(eureka_server, order_service)
+Lay_D(eureka_server, order_service)
+
+Lay_D(kafka_messaging, book_service)
+Lay_D(store_service, order_service)
+
+@enduml
