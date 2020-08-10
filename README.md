@@ -70,8 +70,8 @@ Semestral project (40+5 points)
 11. Communication
 
 ```diff
-- REST API defined using Open API standard (Swagger) (2)
-- auto-generated in each service (1)
++ REST API defined using Open API standard (Swagger) (2)
++ auto-generated in each service (1)
 + clear URLs (2)
 + clean usage of HTTP statuses (2)
 + eventually message based asynchronous communication via queue (bonus: 1)
@@ -80,7 +80,7 @@ Semestral project (40+5 points)
 12. Transparency – the client should never know the exact location of a service.
 
 ```diff
-- service discovery (2)
++ service discovery (2)
 - eventually client side load balancing (bonus: 0.5) or workload balancing (bonus: 0.5)
 ```
 
